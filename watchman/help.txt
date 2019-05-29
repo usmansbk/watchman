@@ -1,0 +1,80 @@
+NAME
+	watchman - routinely manage files in a directory
+
+SYNOPSIS
+	watchman [action][opt] [file | path | time]
+	watchman [action][opt] [file | path | time args] [--to][path]
+
+DESCRIPTION
+	Watchman is a program that watch directories for changes and manage the
+	files by moving them to your preferred directories.
+
+OPTIONS
+	-a	add action
+	-r	remove action
+	-l	list action
+	
+	*** The Three options below require file|path|time arguments
+	-f	file option
+	-p	path option
+	-t	time option
+
+	*** The Three options below only work with the -l action
+	-F	files watchlist
+	-P	paths watchlist
+	-T	times watchlist
+
+	--to	new location(path) of file
+	--now	watch paths list now
+	--help
+		display this help and exit
+	--version
+		output version information and exit
+
+NOTE
+	watchman maybe linked to wm for easier access.
+
+EXAMPLES
+	Using watchman to routinely move all image file(jpg)
+	to path(/usr/home/pictures)
+		watchman -af "*.jpg" --to "/usr/home/pictures"
+
+	Adding a path to watchlist
+
+		watchman -ap "/usr/home/downloads"
+
+	Adding a file to watchlist
+
+		watchman -rf "filename"
+
+	Removing a path form watchlist
+
+		watchman -rp "path"
+
+	Setting routine watch every 30 minutes
+
+		watchman -at 30
+
+	Listing paths in watchlist
+
+		watchman -lP
+
+	Listing files in watchlist
+
+		watchman -lF
+
+	Listing times in watchlist
+
+		watchman -lT
+
+AUTHOR
+	Written by Babakolo Usman Suleiman.
+
+REPORTING BUGS
+	Report watchman bugs to usmansbk@gmail.com
+
+COPYRIGHT
+	Copyright (C) 2016 Free Software Foundation, Inc. License GPLv3+: GNU
+	GPL version 3 or later <http://gnu.ort/license/gpl.html>
+	This is free software; you are free to change and redistribute it.
+	There is NO WARRANTY, to the extent permitted by law.

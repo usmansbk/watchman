@@ -1,0 +1,59 @@
+#!/bin/sh
+
+# Very simple file extension changer script for renaming the
+# file name extensions of a collection of files in a folder
+# and subfolders.
+# Basically i created this program to add .jpg extension to a
+# very huge collection of manga page image files.
+# Copyleft (C) 2016 Usman Suleiman Babakolo.
+
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of
+# the License, or (at your option) any later version.
+
+# This program is distributed in the hopes that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+
+# Main Program
+
+# Error Checking
+if [ $# -lt 2 ]
+then
+	echo "Usage: $0 [folder] [extension]" 1>&2
+	exit 1
+fi
+
+if [ ! -d $1 ]
+then
+	echo "$1 is not a directory" 1>&2
+	exit 1
+fi
+# End of Error Checking
+
+rename() {
+	local folder=$1
+	cd $folder
+	for file in *
+	do
+		if [ -f $file ]
+		then
+			echo renaming $file >> ch_log.log
+			mv $file $file.$extension
+		elif [ -d $file ]
+		then
+			echo renaming files in $file >> ch_log.log
+			rename $file
+		fi
+	done
+	cd ..
+	return
+}
+
+rename $folder
+
+echo "Operation Complete!" >> ch_log.log
+
+exit 0
